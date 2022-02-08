@@ -25,9 +25,4 @@ MyButton.defaultProps = {
   onPress: () => Alert.alert('default'),
 };
 
-// MyButton.PropTypes = {
-//   title: PropTypes.string.isRequired, // 반드시 string 이여야 하며 데이터가 항상 있어야 한다.
-//   onPress: PropTypes.func,
-// };
-
 export default MyButton;
