@@ -1,6 +1,5 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, Alert } from 'react-native';
-import PropTypes from 'prop-types';
 
 const MyButton = ({ title, onPress, children }) => {
   return (
