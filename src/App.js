@@ -1,22 +1,23 @@
 import react, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import styled, { css } from 'styled-components/native';
-import Input from './Input';
+import { StyleSheet, Text, View } from 'react-native';
+import styled, { ThemeProvider } from 'styled-components/native';
+import { theme } from './theme';
 
-// styled-components 사용
 const Container = styled.View`
   flex: 1;
-  background-color: #e3e3e3;
+  background-color: ${theme.background};
   align-items: center;
   justify-content: center;
 `;
 
 export default function App() {
   return (
-    <Container>
-      <StatusBar style="auto" />
-      <Input />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Text>ToDo</Text>
+        <StatusBar style="auto" />
+      </Container>
+    </ThemeProvider>
   );
 }
