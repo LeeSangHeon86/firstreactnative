@@ -1,33 +1,22 @@
 import react, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
-import { styles, orangeText } from './style';
+import { StyleSheet, View } from 'react-native';
+import styled, { css } from 'styled-components/native';
+import Input from './Input';
+
+// styled-components 사용
+const Container = styled.View`
+  flex: 1;
+  background-color: #e3e3e3;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={[styles.text, orangeText]}>Open up App.js</Text>
-      <Text style={[styles.text, styles.error]}>Error Text</Text>
+    <Container>
       <StatusBar style="auto" />
-    </View>
+      <Input />
+    </Container>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   text: {
-//     backgroundColor: 'black',
-//     color: 'white',
-//     fontSize: 20,
-//   },
-//   error: {
-//     backgroundColor: 'pink',
-//     color: 'red',
-//     fontSize: 20,
-//   },
-// });
