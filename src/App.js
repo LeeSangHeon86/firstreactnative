@@ -1,8 +1,9 @@
 import react, { useState } from 'react';
-import { Text, StatusBar } from 'react-native';
+import { Text, StatusBar, Dimensions, useWindowDimensions } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import Input from './components/Input';
+import Task from './components/Task';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -20,13 +21,21 @@ const Title = styled.Text`
   padding: 0 20px;
 `;
 
+const List = styled.ScrollView`
+  flex: 1;
+  width: ${({ width }) => width - 40}px;
+`;
+
 export default function App() {
   const [newTask, setNewTask] = useState('');
+  // const width = useWindowDimensions().width;
+  const width = Dimensions.get('window').width;
 
   const addTask = () => {
     alert(newTask);
     setNewTask('');
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -41,6 +50,24 @@ export default function App() {
           onChangeText={text => setNewTask(text)}
           onSubmitEditing={addTask}
         ></Input>
+        <List width={width}>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          {/* <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task>
+          <Task text="reack native"></Task> */}
+        </List>
       </Container>
     </ThemeProvider>
   );
