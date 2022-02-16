@@ -31,9 +31,51 @@ export default function App() {
   // const width = useWindowDimensions().width;
   const width = Dimensions.get('window').width;
 
+  const tempData = {
+    1: { id: '1', text: 'react native', completed: false },
+    2: { id: '2', text: 'expo', completed: true },
+    3: { id: '3', text: 'javascript', completed: false },
+  };
+
+  const [tasks, setTasks] = useState(tempData);
+
   const addTask = () => {
-    alert(newTask);
+    // 빈 문자열 방지
+    if (newTask.length < 1) {
+      return;
+    }
+
+    // 현재 시간대로 ID 설정
+    const ID = Date.now().toString();
+
+    // 새로운 task 객체 생성
+    const newTaskObject = {
+      [ID]: { id: ID, text: newTask, completed: false },
+    };
+
+    // 기존 tasks 에 새로운 task 추가
+    setTasks({ ...tasks, ...newTaskObject });
+
+    alert('새로운 할일이 추가되었습니다.');
     setNewTask('');
+  };
+
+  const deleteTask = id => {
+    const currentTasks = Object.assign({}, tasks);
+    delete currentTasks[id];
+    setTasks(currentTasks);
+  };
+
+  const toggleTask = id => {
+    const currentTasks = Object.assign({}, tasks);
+    currentTasks[id].completed = !currentTasks[id].completed;
+    setTasks(currentTasks);
+  };
+
+  const updateTask = item => {
+    const currentTasks = Object.assign({}, tasks);
+    currentTasks[item.id] = item;
+    setTasks(currentTasks);
   };
 
   return (
@@ -49,24 +91,22 @@ export default function App() {
           value={newTask}
           onChangeText={text => setNewTask(text)}
           onSubmitEditing={addTask}
+          onBlur={() => setNewTask('')}
         ></Input>
         <List width={width}>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          {/* <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task>
-          <Task text="reack native"></Task> */}
+          {Object.values(tasks)
+            .reverse()
+            .map(item => {
+              return (
+                <Task
+                  key={item.id}
+                  item={item}
+                  deleteTask={deleteTask}
+                  toggleTask={toggleTask}
+                  updateTask={updateTask}
+                />
+              );
+            })}
         </List>
       </Container>
     </ThemeProvider>

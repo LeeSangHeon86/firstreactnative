@@ -17,7 +17,13 @@ const StyledInput = styled.TextInput.attrs(({ theme }) => ({
   color: white;
 `;
 
-const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
+const Input = ({
+  placeholder,
+  value,
+  onChangeText,
+  onSubmitEditing,
+  onBlur,
+}) => {
   // const width = Dimensions.get('window').width;
   const width = useWindowDimensions().width;
   return (
@@ -32,6 +38,7 @@ const Input = ({ placeholder, value, onChangeText, onSubmitEditing }) => {
       value={value}
       onChangeText={onChangeText}
       onSubmitEditing={onSubmitEditing} // 제출 토글시 작동 함수
+      onBlur={onBlur}
     ></StyledInput>
   );
 };
@@ -42,6 +49,7 @@ Input.propTypes = {
   value: propTypes.string.isRequired,
   onChangeText: propTypes.func.isRequired,
   onSubmitEditing: propTypes.func.isRequired,
+  onBlur: propTypes.func.isRequired,
 };
 
 export default Input;
