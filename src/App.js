@@ -4,6 +4,8 @@ import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
 import Input from './components/Input';
 import Task from './components/Task';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -31,13 +33,21 @@ export default function App() {
   // const width = useWindowDimensions().width;
   const width = Dimensions.get('window').width;
 
-  const tempData = {
-    1: { id: '1', text: 'react native', completed: false },
-    2: { id: '2', text: 'expo', completed: true },
-    3: { id: '3', text: 'javascript', completed: false },
+  const [tasks, setTasks] = useState({});
+
+  const storeData = async task => {
+    try {
+      await AsyncStorage.setItem('tasks', JSON.stringify(task));
+      setTasks(task);
+    } catch (e) {}
   };
 
-  const [tasks, setTasks] = useState(tempData);
+  const getData = async () => {
+    try {
+      const loadedData = await AsyncStorage.getItem('tasks');
+      setTasks(JSON.parse(loadedData || {}));
+    } catch (e) {}
+  };
 
   const addTask = () => {
     // 빈 문자열 방지
@@ -54,7 +64,8 @@ export default function App() {
     };
 
     // 기존 tasks 에 새로운 task 추가
-    setTasks({ ...tasks, ...newTaskObject });
+    // setTasks({ ...tasks, ...newTaskObject });
+    storeData({ ...tasks, ...newTaskObject });
 
     alert('새로운 할일이 추가되었습니다.');
     setNewTask('');
@@ -63,22 +74,27 @@ export default function App() {
   const deleteTask = id => {
     const currentTasks = Object.assign({}, tasks);
     delete currentTasks[id];
-    setTasks(currentTasks);
+    // setTasks(currentTasks);
+    storeData(currentTasks);
   };
 
   const toggleTask = id => {
     const currentTasks = Object.assign({}, tasks);
     currentTasks[id].completed = !currentTasks[id].completed;
-    setTasks(currentTasks);
+    // setTasks(currentTasks);
+    storeData(currentTasks);
   };
 
   const updateTask = item => {
     const currentTasks = Object.assign({}, tasks);
     currentTasks[item.id] = item;
-    setTasks(currentTasks);
+    // setTasks(currentTasks);
+    storeData(currentTasks);
   };
 
-  return (
+  const [isReady, setIsReady] = useState(false);
+
+  return isReady ? (
     <ThemeProvider theme={theme}>
       <Container>
         <StatusBar
@@ -110,5 +126,13 @@ export default function App() {
         </List>
       </Container>
     </ThemeProvider>
+  ) : (
+    <AppLoading
+      startAsync={getData}
+      onFinish={() => {
+        setIsReady(true);
+      }}
+      onError={() => {}}
+    />
   );
 }
