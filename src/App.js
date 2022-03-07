@@ -1,11 +1,6 @@
 import react, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
-import Counter from './components/Counter';
-import Form from './components/Form';
-import Button from './components/Button';
 import CoinInfo from './components/CoinInfo';
 import { useFetch } from './hooks/useFetch';
 
