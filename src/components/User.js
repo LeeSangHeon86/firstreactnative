@@ -21,6 +21,7 @@ const User = () => {
   const { name, setName } = useContext(UserContext);
 
   return (
+    // consumer 쓰는 법
     // <>
     //   <UserConsumer>
     //     {({ name }) => <StyledText>Name : {name}</StyledText>}
@@ -38,6 +39,8 @@ const User = () => {
     //     )}
     //   </UserConsumer>
     // </>
+
+    // useContext 쓰는법
     <>
       <StyledText>Name : {name}</StyledText>
       <StyledInput
