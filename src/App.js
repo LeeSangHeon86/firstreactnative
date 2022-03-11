@@ -1,12 +1,12 @@
-import react, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components/native';
-import { theme } from './theme';
-import CoinInfo from './components/CoinInfo';
-import { useFetch } from './hooks/useFetch';
+
+import React from 'react';
+import styled from 'styled-components/native';
+import User from './components/User';
+import { UserProvider } from './contexts/User';
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: white;
+  background-color: #fff;
   align-items: center;
   justify-content: flex-start;
 `;
@@ -37,20 +37,10 @@ export default function App() {
   console.log(data['data']);
 
   return (
-    <ThemeProvider theme={theme}>
+    <UserProvider>
       <Container>
-        {inProgress && <LoadingText>Loading...</LoadingText>}
-        {data['data'].map(({ symbol, name, price_usd }) => {
-          return (
-            <CoinInfo
-              key={symbol}
-              symbol={symbol}
-              name={name}
-              price={price_usd}
-            />
-          );
-        })}
+        <User />
       </Container>
-    </ThemeProvider>
+    </UserProvider>
   );
 }
