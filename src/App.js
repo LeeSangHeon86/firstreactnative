@@ -11,6 +11,8 @@ const Container = styled.View`
   justify-content: center;
 `;
 
+// navigation
+
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
