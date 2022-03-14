@@ -6,10 +6,21 @@ const Stack = createStackNavigator();
 
 const StackNav = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+    // <Stack.Navigator initialRouteName='Home'>
+    <Stack.Navigator
+      screenOptions={{ cardStyle: { backgroundColor: '#ffffff' } }}
+    >
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="List" component={List} />
-      <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen
+        name="Chat"
+        component={Chat}
+        options={{ headerTitle: 'chat screen' }}
+      />
     </Stack.Navigator>
   );
 };
