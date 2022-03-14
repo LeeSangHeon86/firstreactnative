@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
+import Navigation from '../navigations';
 
 const Container = styled.View`
   flex: 1;
@@ -11,15 +12,6 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-// navigation
-
 export default function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <Text>ToDo</Text>
-        <StatusBar style="auto" />
-      </Container>
-    </ThemeProvider>
-  );
+  return <Navigation />;
 }
