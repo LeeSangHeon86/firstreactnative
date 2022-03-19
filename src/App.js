@@ -1,3 +1,9 @@
+import react, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import styled, { ThemeProvider } from 'styled-components/native';
+import { theme } from './theme';
+import Navigation from '../navigations';
 
 import React from 'react';
 import styled from 'styled-components/native';
@@ -31,16 +37,6 @@ const LoadingText = styled.Text`
 `;
 
 export default function App() {
-
-  const URL = 'https://api.coinlore.net/api/tickers/?limit=3';
-  const { data, error, inProgress } = useFetch(URL);
-  console.log(data['data']);
-
-  return (
-    <UserProvider>
-      <Container>
-        <User />
-      </Container>
-    </UserProvider>
-  );
+  // 2022.03.19 Navigation Stack 편
+  return <Navigation />;
 }
