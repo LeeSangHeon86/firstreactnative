@@ -13,5 +13,6 @@ const Container = styled.View`
 `;
 
 export default function App() {
+  // 2022.03.19 Navigation Stack 편
   return <Navigation />;
 }
