@@ -15,7 +15,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Text>ToDo</Text>
+        <Text>ChatApp</Text>
         <StatusBar style="auto" />
       </Container>
     </ThemeProvider>
