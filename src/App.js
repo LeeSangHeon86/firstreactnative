@@ -37,6 +37,7 @@ const LoadingText = styled.Text`
 `;
 
 export default function App() {
+  // 20220406
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -45,5 +46,4 @@ export default function App() {
       </Container>
     </ThemeProvider>
   );
-
 }
