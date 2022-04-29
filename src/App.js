@@ -39,6 +39,7 @@ const LoadingText = styled.Text`
 export default function App() {
   // 20220406
   // 20220414
+  // 20220429
   return (
     <ThemeProvider theme={theme}>
       <Container>
